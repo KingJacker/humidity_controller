@@ -111,14 +111,14 @@ class VentController:
                 self.fan_on_timestamp = current_time
                 print(f"Controller: Dew Point ({current_dp:.2f}°C) > Threshold ({self.dew_point_threshold_c:.1f}°C). Turning fan ON.")
             else:
-                # print(f"Controller: DP ({current_dp:.2f}°C) below threshold. Fan remains OFF.")
+                print(f"Controller: DP ({current_dp:.2f}°C) below threshold. Fan remains OFF.")
                 pass
 
         # If fan is currently ON
         else:
             # Check Minimum Run Time
             if (current_time - self.fan_on_timestamp) < self.min_fan_runtime_seconds:
-                # print(f"Controller: Fan ON (Min runtime: {int(self.min_fan_runtime_seconds - (current_time - self.fan_on_timestamp))}s left). DP: {current_dp:.2f}°C")
+                print(f"Controller: Fan ON (Min runtime: {int(self.min_fan_runtime_seconds - (current_time - self.fan_on_timestamp))}s left). DP: {current_dp:.2f}°C")
                 pass # Do nothing, let it run for min time
 
             # Check Maximum Run Time
@@ -135,7 +135,7 @@ class VentController:
             
             else:
                 # Fan is ON, within min/max runtime, and DP is between threshold and hysteresis
-                # print(f"Controller: Fan ON. DP ({current_dp:.2f}°C) within hysteresis range.")
+                print(f"Controller: Fan ON. DP ({current_dp:.2f}°C) within hysteresis range.")
                 pass
 
 
@@ -167,4 +167,4 @@ class VentController:
         self._running = False
         if self.relay:
             self.relay.off()
-            # print("Controller: Fan ensured OFF on stop.")
+            print("Controller: Fan ensured OFF on stop.")
